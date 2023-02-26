@@ -15,6 +15,8 @@ public class controlScript : MonoBehaviour
     public Image controlsMenuScrollings;
     public Button openControlButton;
     public Button closeControlButton;
+    public RectTransform urBrokePanel;
+    public Button xButton;
 
     public int totalMoney;
     public int totalPower;
@@ -39,11 +41,13 @@ public class controlScript : MonoBehaviour
         controlsMenuScrollings.gameObject.SetActive(true);
         openControlButton.gameObject.SetActive(false);
         closeControlButton.gameObject.SetActive(true);
+        urBrokePanel.gameObject.SetActive(false);
 
         openBarButton.onClick.AddListener(openBar);
         closeBarButton.onClick.AddListener(closeBar);
         openControlButton.onClick.AddListener(openControls);
         closeControlButton.onClick.AddListener(closeControls);
+        xButton.onClick.AddListener(closeUrBroke);
     }
 
     public void openControls()
@@ -83,5 +87,35 @@ public class controlScript : MonoBehaviour
     void Update()
     {
         GetCurrentFill();
+    }
+
+    public void closeUrBroke()
+    {
+        urBrokePanel.gameObject.SetActive(false);
+    }
+
+    public void openUrBroke()
+    {
+        urBrokePanel.gameObject.SetActive(true);
+    }
+
+    public bool subtractMoney(int price)
+    {
+        bool returnMe = true;
+        if (totalMoney >= price)
+        {
+            totalMoney = totalMoney - price;
+            moneyDisplay.text = ("$" + totalMoney);
+        } else {
+            returnMe = false;
+            openUrBroke();
+        }
+        return returnMe;
+    }//returns bool true if enough money else false
+
+    public void addMoney(int price)
+    {
+        totalMoney = totalMoney + price;
+        moneyDisplay.text = ("$" + totalMoney);
     }
 }
