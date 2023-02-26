@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Factory1
+  - Factory2
   layers:
   - Default
   - TransparentFX
